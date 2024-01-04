@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-class FetchRecipesViewModel: ObservableObject {
+class RecipesViewModel: ObservableObject {
    // Published properties that will be observed for changes
     @Published var recipes: [RecipeModel] = []
     @Published var recipeDetails: [RecipeDetailsModel] = []
