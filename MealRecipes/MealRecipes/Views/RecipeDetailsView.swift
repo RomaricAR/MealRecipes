@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeDetailsView: View {
-    @EnvironmentObject var recipesViewModel: FetchRecipesViewModel
+    @EnvironmentObject var recipeViewModel: RecipeViewModel
     
    // let imageURL: String
     
@@ -18,7 +18,7 @@ struct RecipeDetailsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 10) {
                     // Check if there are any recipe details
-                    if let details = recipesViewModel.recipeDetails.first {
+                    if let details = recipeViewModel.recipeDetails.first {
                         Text(details.strMeal)
                             .font(.title)
                             .foregroundStyle(Color("Peach"))
@@ -71,7 +71,7 @@ struct RecipeDetailsView: View {
             .padding()
         }.onDisappear {
             // Clear the recipe details when the view disappears
-            recipesViewModel.recipeDetails = []
+            recipeViewModel.recipeDetails = []
         }
     }
 }
@@ -79,5 +79,5 @@ struct RecipeDetailsView: View {
 
 #Preview {
     RecipeDetailsView()
-        .environmentObject(FetchRecipesViewModel())
+        .environmentObject(RecipeViewModel())
 }

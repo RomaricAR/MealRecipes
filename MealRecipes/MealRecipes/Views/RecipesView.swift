@@ -10,7 +10,7 @@ import SwiftUI
 // View for displaying a list of recipes
 struct RecipesView: View {
     // Access the shared FetchRecipesViewModel instance
-    @EnvironmentObject var recipesViewModel: FetchRecipesViewModel
+    @EnvironmentObject var recipeViewModel: RecipeViewModel
     @State var recipeIsSelected = false
     @State private var selectedRecipe: RecipeModel? = nil
     @State private var viewID = UUID()
@@ -31,7 +31,7 @@ struct RecipesView: View {
                 ScrollView {
                     // Create a grid with lazy loading
                     LazyVGrid(columns: columns, spacing: 5) {
-                        ForEach(recipesViewModel.recipes) { recipe in
+                        ForEach(recipeViewModel.recipes) { recipe in
                             // Load and display the recipe image
                             AsyncImage(url: URL(string: String(recipe.strMealThumb))) { image in
                                 image
@@ -65,12 +65,12 @@ struct RecipesView: View {
                             }
                             // Handle tap gesture
                             .onTapGesture {
-                                recipesViewModel.getRecipeDetails(id: recipe.id)
+                                recipeViewModel.getRecipeDetails(id: recipe.id)
                                 recipeIsSelected = true
                             }.navigationDestination(isPresented: $recipeIsSelected) {
                                 // Navigate to the RecipeDetailsView when a recipe is selected
                                 RecipeDetailsView()
-                                    .environmentObject(recipesViewModel)
+                                    .environmentObject(recipeViewModel)
                                     .onDisappear {
                                         // Generate a new UUID when the view disappears
                                         viewID = UUID()
@@ -86,5 +86,5 @@ struct RecipesView: View {
 
 #Preview {
     RecipesView()
-        .environmentObject(FetchRecipesViewModel())
+        .environmentObject(RecipeViewModel())
 }
