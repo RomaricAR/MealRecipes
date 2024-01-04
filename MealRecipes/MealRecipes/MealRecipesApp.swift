@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct MealRecipesApp: App {
+    @StateObject var recipesViewModel = FetchRecipesViewModel()
     var body: some Scene {
         WindowGroup {
-            RecipesView()
+            NavigationStack {
+                RecipesView()
+                    .environmentObject(recipesViewModel)
+            }
         }
     }
 }
