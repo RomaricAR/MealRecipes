@@ -9,9 +9,7 @@ import SwiftUI
 
 struct RecipeDetailsView: View {
     @EnvironmentObject var recipeViewModel: RecipeViewModel
-    
-   // let imageURL: String
-    
+
     var body: some View {
         ZStack {
             Color("Cream").ignoresSafeArea()

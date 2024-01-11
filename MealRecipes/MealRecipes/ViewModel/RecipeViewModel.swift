@@ -16,14 +16,14 @@ class RecipeViewModel: ObservableObject {
     @Published var recipeId = ""
     var cancellables = Set<AnyCancellable>()
     
+    var urlString: String = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
+    
     init() {
         getRecipes()
     }
-    
-    
-    
+
     func getRecipes() {
-        guard let url = URL(string: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert") else { return }
+        guard let url = URL(string: urlString) else { return }
         //Creates Publisher and for this case it is automatically subscribed to a background thread
         URLSession.shared.dataTaskPublisher(for: url)
         //Receive on the main thread
@@ -33,7 +33,6 @@ class RecipeViewModel: ObservableObject {
                 guard let response = response as? HTTPURLResponse, response.statusCode >= 200 && response.statusCode < 300 else {
                     throw URLError(.badServerResponse)
                 }
-                
                 return data
             }
         // Decode the JSON response
@@ -46,13 +45,19 @@ class RecipeViewModel: ObservableObject {
                 return RecipeResponse(meals: filteredRecipes)
             }
         // Handle completion
-            .sink { (completion) in
-                print("Completion: \(completion)")
-            } 
-        // Handle received value
-            receiveValue: { [weak self] (returnedRecipes) in
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break // Network request completed successfully
+                case .failure(let error):
+                    print("Error during network request: \(error)")
+                    // Handle error appropriately
+                    self.recipes = [] // Set recipes to an empty array in case of an error
+                }
+            }, receiveValue: { [weak self] returnedRecipes in
                 self?.recipes = returnedRecipes.meals
-            }
+            })
+
         // Store the cancellable reference
             .store(in: &cancellables)
     }
@@ -84,8 +89,6 @@ class RecipeViewModel: ObservableObject {
                          // Append the transformed or original data to your array
                          self?.recipeDetails.append(recipeDetails)
                      }
-                
-            }
-            .store(in: &cancellables)
+            }.store(in: &cancellables)
     }
 }
