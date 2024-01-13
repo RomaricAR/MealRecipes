@@ -3,6 +3,7 @@
 //  MealRecipes
 //
 //  Created by Romaric Allahramadji on 1/2/24.
+//  Copyright © 2024 Romaric Allahramadji. All rights reserved. 
 //
 
 import SwiftUI

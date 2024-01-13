@@ -116,5 +116,69 @@
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4037F695-B4B9-49D7-A967-49EE7E136F8F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MealRecipesTests/RecipeViewModel_Tests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "test_RecipeViewModel_GetRecipes_Cancellation()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4037F695-B4B9-49D7-A967-49EE7E136F8F - cec422e043ef2602"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MealRecipesTests.RecipeViewModel_Tests.test_RecipeViewModel_GetRecipes_Cancellation() -&gt; ()"
+                  moduleName = "MealRecipesTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/romaricallahramadji/Documents/MealRecipes/MealRecipes/MealRecipesTests/RecipeViewModel_Tests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "416">
+               </Location>
+               <Location
+                  uuid = "4037F695-B4B9-49D7-A967-49EE7E136F8F - fe801a48a7fa7130"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Combine.AnyCancellable) -&gt; () in MealRecipesTests.RecipeViewModel_Tests.test_RecipeViewModel_GetRecipes_Cancellation() -&gt; ()"
+                  moduleName = "MealRecipesTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/romaricallahramadji/Documents/MealRecipes/MealRecipes/MealRecipesTests/RecipeViewModel_Tests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "56E73514-5863-4617-8610-6CAEC3BE2CA3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MealRecipes/Views/RecipesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -3,6 +3,7 @@
 //  MealRecipes
 //
 //  Created by Romaric Allahramadji on 1/2/24.
+//  Copyright © 2024 Romaric Allahramadji. All rights reserved. 
 //
 
 import Foundation
@@ -17,6 +18,10 @@ class RecipeViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
     
     var urlString: String = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
+    var recipeDetailsUrlString = "https://www.themealdb.com/api/json/v1/1/lookup.php?"
+    
+    //For Unit Test purposes only
+    var constructedURL = ""
     
     init() {
         getRecipes()
@@ -62,17 +67,18 @@ class RecipeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    
     func getRecipeDetails(id: String) {
-        // URL for the API endpoint
-        guard let recipeDetailsUrl = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php?") else { return }
-        
         // Construct the URL with the recipe ID
-        guard let urlString = URL(string: "\(recipeDetailsUrl)i=\(id)") else { return }
+        guard let url = URL(string: "\(recipeDetailsUrlString)i=\(id)") else { return }
         
-        performRequest(url: urlString)
+        //For Unit Test purposes only
+        constructedURL = String(url.description)
+        
+        performRecipeDetailsRequest(url: url)
     }
     
-    func performRequest(url: URL) {
+    func performRecipeDetailsRequest(url: URL) {
         URLSession.shared.dataTaskPublisher(for: url)
             .receive(on: DispatchQueue.main)
             .tryMap { (data, response) -> Data in
