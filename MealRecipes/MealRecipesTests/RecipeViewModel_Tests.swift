@@ -12,27 +12,40 @@ import XCTest
 
 final class RecipeViewModel_Tests: XCTestCase {
     
-    func test_RecipeViewModel_GetRecipes_IsNotEmpty() {
+    func test_RecipeViewModel_GetRecipes_ShouldNotBeEmpty() {
         // Given
-        let viewModel = RecipeViewModel()
-        let expectation = self.expectation(description: "Recipes loaded")
+        let viewModel = RecipeViewModel(networkService: MockNetworkService())
+        let expectation = self.expectation(description: "Recipes loaded successfully")
 
         // When
-        viewModel.getRecipes()
+        viewModel.getMockRecipes()
 
         // Then
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            XCTAssertTrue(viewModel.recipes.allSatisfy { !$0.strMeal.isEmpty && !$0.strMealThumb.isEmpty && !$0.idMeal.isEmpty })
-           
+        XCTAssertFalse(viewModel.recipes.allSatisfy { $0.recipeName.isEmpty && $0.recipeName.isEmpty && $0.recipeId.isEmpty })
             expectation.fulfill()
-        }
-        viewModel.recipes = []
+ 
         waitForExpectations(timeout: 10.0, handler: nil)
     }
     
-    func test_RecipeViewModel_GetRecipes_InvalidURL() {
+    func test_RecipeViewModel_GetRecipes_ShouldBESupportedUrl() {
         // Given
-        let viewModel = RecipeViewModel()
+        let viewModel = RecipeViewModel(networkService: MockNetworkService())
+        let expectation = self.expectation(description: "Should be a supported URL")
+        
+        // When
+        viewModel.getMockRecipes()
+        
+        //Then
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            XCTAssertTrue(!viewModel.recipes.isEmpty)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func test_RecipeViewModel_GetRecipes_UrlShouldNotBeInvalid() {
+        // Given
+        let viewModel = RecipeViewModel(networkService: MockNetworkService())
         viewModel.urlString = "invalid_url"
         let expectation = self.expectation(description: "Invalid URL")
         
@@ -47,9 +60,9 @@ final class RecipeViewModel_Tests: XCTestCase {
         waitForExpectations(timeout: 10.0, handler: nil)
     }
     
-    func test_RecipeViewModel_GetRecipes_Cancellation() {
+    func test_RecipeViewModel_GetRecipes_ShouldHandleCancellationCorrectly() {
         // Given
-        let viewModel = RecipeViewModel()
+        let viewModel = RecipeViewModel(networkService: MockNetworkService())
         let expectation = self.expectation(description: "Cancellation")
 
         // When
@@ -65,9 +78,9 @@ final class RecipeViewModel_Tests: XCTestCase {
         waitForExpectations(timeout: 10.0, handler: nil)
     }
 
-    func test_RecipeViewModel_GetRecipeDetails_URLConstructionAndDetailsRetrieval() {
+    func test_RecipeViewModel_GetRecipeDetails_ShouldConstructUrlProperly() {
         // Given
-        let viewModel = RecipeViewModel()
+        let viewModel = RecipeViewModel(networkService: MockNetworkService())
         let validID = "52893"
         let expectedURL = URL(string: "\(viewModel.recipeDetailsUrlString)i=\(validID)")
         let expectation = self.expectation(description: "Details Retrieval")

@@ -10,7 +10,7 @@ import SwiftUI
 
 @main
 struct MealRecipesApp: App {
-    @StateObject var recipeViewModel = RecipeViewModel()
+    @StateObject var recipeViewModel = RecipeViewModel(networkService: MockNetworkService())
     var body: some Scene {
         WindowGroup {
             NavigationStack {

@@ -8,14 +8,19 @@
 
 import Foundation
 
-struct RecipeModel: Identifiable, Codable {
-    let strMeal: String
-    let strMealThumb: String
-    let idMeal: String
+struct RecipeModel: Codable, Identifiable {
+    let recipeName: String
+    let recipeImageURL: String
+    let recipeId: String
     
     // Computed property to conform to Identifiable protocol
     var id: String {
-        idMeal
+        recipeId
+    }
+    enum CodingKeys: String, CodingKey {
+        case recipeName = "strMeal"
+        case recipeImageURL = "strMealThumb"
+        case recipeId = "idMeal"
     }
 }
 
@@ -26,26 +31,56 @@ struct RecipeDetailsModel: Identifiable, Codable {
     let strMealThumb: String
     let idMeal: String
 
-    let strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10: String
-    let strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20: String?
-
-    let strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10: String?
-    let strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20: String?
-
-    // Ingredients for the meal (up to 20)
-    var ingredients: [String] {
-        return [strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20].compactMap { $0?.isEmpty == false ? $0 : nil }
-    }
-
-    // Measurements for the ingredients (up to 20)
-    var measures: [String] {
-        return [strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20].compactMap { $0?.isEmpty == false ? $0 : nil }
-    }
+    let ingredients: [String]
+    let measures: [String]
 
     var id: String {
         idMeal
     }
+
+    enum CodingKeys: String, CodingKey {
+        case strMeal, strInstructions, strMealThumb, idMeal
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        strMeal = try container.decode(String.self, forKey: .strMeal)
+        strInstructions = try container.decode(String.self, forKey: .strInstructions)
+        strMealThumb = try container.decode(String.self, forKey: .strMealThumb)
+        idMeal = try container.decode(String.self, forKey: .idMeal)
+
+        // Dynamically decode ingredients and measures
+        var dynamicIngredients: [String] = []
+        var dynamicMeasures: [String] = []
+
+        let containerDic = try decoder.singleValueContainer()
+        let recipeDic = try containerDic.decode([String: String?].self)
+        
+
+        var index = 1
+        while true {
+            let ingredientKey = "strIngredient\(index)"
+            let measureKey = "strMeasure\(index)"
+            if let ingredientKey = recipeDic[ingredientKey] as? String,
+               let measureKey = recipeDic[measureKey] as? String {
+                if !ingredientKey.isEmpty {
+                    dynamicIngredients.append(ingredientKey)
+                    dynamicMeasures.append(measureKey)
+                }
+            } else {
+                // If we can't find an ingredient or measure for the current index, break the loop
+                print("Can't find an ingredient or measure for the current index")
+                break
+            }
+            index += 1
+        }
+        ingredients = dynamicIngredients
+        measures = dynamicMeasures
+    }
+
+
 }
+
 
 struct RecipeDetailsResponse: Codable {
     let meals: [RecipeDetailsModel]

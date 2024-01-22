@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		982E70292B574CC9006637FD /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E70282B574CC9006637FD /* MockNetworkService.swift */; };
 		9869A4BE2B4B6F6200FA566E /* RecipeViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9869A4BD2B4B6F6200FA566E /* RecipeViewModel_Tests.swift */; };
+		986E88502B5E1BDB004CF3D7 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E884F2B5E1BDB004CF3D7 /* NetworkingManager.swift */; };
 		98E084272B44EFBB00B60925 /* MealRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E084262B44EFBB00B60925 /* MealRecipesApp.swift */; };
 		98E084292B44EFBB00B60925 /* RecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E084282B44EFBB00B60925 /* RecipeDetailsView.swift */; };
 		98E0842B2B44EFBD00B60925 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98E0842A2B44EFBD00B60925 /* Assets.xcassets */; };
@@ -28,8 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		982E70282B574CC9006637FD /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		9869A4BB2B4B6F6200FA566E /* MealRecipesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MealRecipesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9869A4BD2B4B6F6200FA566E /* RecipeViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel_Tests.swift; sourceTree = "<group>"; };
+		986E884F2B5E1BDB004CF3D7 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		98E084232B44EFBB00B60925 /* MealRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E084262B44EFBB00B60925 /* MealRecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRecipesApp.swift; sourceTree = "<group>"; };
 		98E084282B44EFBB00B60925 /* RecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsView.swift; sourceTree = "<group>"; };
@@ -66,10 +70,19 @@
 			path = MealRecipesTests;
 			sourceTree = "<group>";
 		};
+		986E884E2B5E1BA1004CF3D7 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				986E884F2B5E1BDB004CF3D7 /* NetworkingManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		98E0841A2B44EFBB00B60925 = {
 			isa = PBXGroup;
 			children = (
 				98E084252B44EFBB00B60925 /* MealRecipes */,
+				98E0842A2B44EFBD00B60925 /* Assets.xcassets */,
 				9869A4BC2B4B6F6200FA566E /* MealRecipesTests */,
 				98E084242B44EFBB00B60925 /* Products */,
 			);
@@ -88,10 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				98E084262B44EFBB00B60925 /* MealRecipesApp.swift */,
+				986E884E2B5E1BA1004CF3D7 /* Utilities */,
 				98E084342B44F14C00B60925 /* Models */,
 				98E084362B44F17F00B60925 /* ViewModel */,
 				98E084352B44F15C00B60925 /* Views */,
-				98E0842A2B44EFBD00B60925 /* Assets.xcassets */,
 				98E0842C2B44EFBD00B60925 /* Preview Content */,
 			);
 			path = MealRecipes;
@@ -126,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				98E0843B2B450B2600B60925 /* RecipeViewModel.swift */,
+				982E70282B574CC9006637FD /* MockNetworkService.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -238,11 +252,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				982E70292B574CC9006637FD /* MockNetworkService.swift in Sources */,
 				98E0843C2B450B2600B60925 /* RecipeViewModel.swift in Sources */,
 				98E084382B44F1D000B60925 /* RecipeModel.swift in Sources */,
 				98E084292B44EFBB00B60925 /* RecipeDetailsView.swift in Sources */,
 				98E0843A2B450AD600B60925 /* RecipesView.swift in Sources */,
 				98E084272B44EFBB00B60925 /* MealRecipesApp.swift in Sources */,
+				986E88502B5E1BDB004CF3D7 /* NetworkingManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

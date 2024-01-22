@@ -34,7 +34,7 @@ struct RecipesView: View {
                     LazyVGrid(columns: columns, spacing: 5) {
                         ForEach(recipeViewModel.recipes) { recipe in
                             // Load and display the recipe image
-                            AsyncImage(url: URL(string: String(recipe.strMealThumb))) { image in
+                            AsyncImage(url: URL(string: String(recipe.recipeImageURL))) { image in
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -42,7 +42,7 @@ struct RecipesView: View {
                                     .shadow(radius: 5)
                                     .overlay(alignment: .bottom) {
                                         // Display the recipe name at the bottom of the image
-                                        Text(recipe.strMeal)
+                                        Text(recipe.recipeName)
                                             .foregroundStyle(Color("Retro"))
                                             .shadow(color: .black, radius: 5)
                                             .font(.headline)
@@ -57,7 +57,7 @@ struct RecipesView: View {
                                     .frame(width: 167)
                                     .overlay(alignment: .bottom) {
                                         // Display the recipe name at the bottom of the placeholder
-                                        Text(recipe.strMeal)
+                                        Text(recipe.recipeName)
                                             .foregroundStyle(Color("Retro"))
                                             .font(.headline)
                                             .shadow(color: .black, radius: 5)
@@ -75,7 +75,7 @@ struct RecipesView: View {
                                     .onDisappear {
                                         // Generate a new UUID when the view disappears
                                         viewID = UUID()
-                                    }
+                                }
                             }
                         }
                     }
@@ -87,5 +87,5 @@ struct RecipesView: View {
 
 #Preview {
     RecipesView()
-        .environmentObject(RecipeViewModel())
+        .environmentObject(RecipeViewModel(networkService: MockNetworkService()))
 }

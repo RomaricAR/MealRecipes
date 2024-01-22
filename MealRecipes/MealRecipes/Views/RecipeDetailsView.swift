@@ -78,5 +78,5 @@ struct RecipeDetailsView: View {
 
 #Preview {
     RecipeDetailsView()
-        .environmentObject(RecipeViewModel())
+        .environmentObject(RecipeViewModel(networkService: MockNetworkService()))
 }
